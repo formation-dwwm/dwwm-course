@@ -1,0 +1,15 @@
+h3{
+    margin-top: 50px!important;
+}
+
+details > summary {
+    cursor: pointer;
+}
+
+details > summary::after {
+    content: 'v';
+    float: right;
+    font-family: monospace;
+    font-weight: 800;
+    font-size: 20px;
+}
