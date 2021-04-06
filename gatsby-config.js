@@ -1,6 +1,7 @@
 const path = require('path')
 
 module.exports = {
+  pathPrefix: "/dwwm-course",
   siteMetadata: {
     title: 'Dev Web Course',
     description:
