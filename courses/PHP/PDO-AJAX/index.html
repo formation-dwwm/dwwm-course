@@ -88,7 +88,7 @@ if($_POST[&quot;username&quot;] === &quot;root&quot; &amp;&amp; $_POST[&quot;pas
     $profile = [ &quot;username&quot; =&gt; &quot;root&quot;, &quot;displayName&quot; =&gt; &quot;admin&quot;, &quot;roles&quot; =&gt; [&quot;ROLE_ADMIN&quot;, &quot;ROLE_USER&quot;]];
     sendJson($profile);
 }else{
-    sendJson(401, &quot;Bad credentials&quot;);
+    sendJsonError(401, &quot;Bad credentials&quot;);
 }
 
 function sendJson($data){
