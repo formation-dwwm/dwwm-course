@@ -17,8 +17,8 @@
         &lt;/script&gt;
     &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><pre><code class="language-php">&lt;!-- api.php --&gt;
-&lt;?php
+</code></pre><pre><code class="language-php">&lt;?php
+// api.php
 echo &quot;AJAX&quot;;
 </code></pre><h4>AJAX With JSON</h4><pre><code class="language-html">&lt;!-- index.html --&gt;
 &lt;!doctype html&gt;
@@ -37,8 +37,8 @@ echo &quot;AJAX&quot;;
         &lt;/script&gt;
     &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><pre><code class="language-php">&lt;!-- api.php --&gt;
-&lt;?php
+</code></pre><pre><code class="language-php">&lt;?php
+// api.php
 $users = [
     [ &quot;name&quot; =&gt; &quot;Riri&quot; ],
     [ &quot;name&quot; =&gt; &quot;Fifi&quot; ],
@@ -58,7 +58,7 @@ echo json_encode($users);
                 }),
                 body: JSON.stringify({ username: &quot;root&quot;, password: &quot;&quot; })
             }
-            fetch(&#x27;api.php&#x27;)
+            fetch(&#x27;api.php&#x27;, options)
                 .then(response =&gt; response.json())
                 .then(apiResponse =&gt; {
                     if(apiResponse.success){
@@ -71,10 +71,10 @@ echo json_encode($users);
         &lt;/script&gt;
     &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><pre><code class="language-php">&lt;!-- api.php --&gt;
-&lt;?php
+</code></pre><pre><code class="language-php">&lt;?php
+// api.php
 $json_params = file_get_contents(&quot;php://input&quot;);
-$decoded_params = json_decode($json_params);
+$decoded_params = json_decode($json_params, true);
 
 if (strlen($json_params) &gt; 0 &amp;&amp; json_last_error() == JSON_ERROR_NONE){
     $_POST = $decoded_params;
