@@ -17,14 +17,13 @@ if($_SERVER[&quot;REQUEST_METHOD&quot;] === &quot;POST&quot;){
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
     &lt;title&gt;Simple Form&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
     &lt;form method=&quot;POST&quot;&gt;
-        &lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;
-        &lt;button type=&quot;submit&quot; name=&quot;submit&quot;&gt;Envoyer&lt;/button&gt;
+        &lt;label for=&quot;input-username&quot;&gt;Username:&lt;/label&gt;
+        &lt;input id=&quot;input-username&quot; type=&quot;text&quot; name=&quot;username&quot;/&gt;
+        &lt;button type=&quot;submit&quot; name=&quot;submit&quot;&gt;Send&lt;/button&gt;
     &lt;/form&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -55,8 +54,6 @@ if($_SERVER[&quot;REQUEST_METHOD&quot;] === &quot;POST&quot;){
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
     &lt;title&gt;Simple Form With Error Handling&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -66,8 +63,9 @@ if($_SERVER[&quot;REQUEST_METHOD&quot;] === &quot;POST&quot;){
         &lt;?php }
     } ?&gt;
     &lt;form method=&quot;POST&quot;&gt;
-        &lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;
-        &lt;button type=&quot;submit&quot; name=&quot;submit&quot;&gt;Envoyer&lt;/button&gt;
+        &lt;label for=&quot;input-username&quot;&gt;Username:&lt;/label&gt;
+        &lt;input id=&quot;input-username&quot;  type=&quot;text&quot; name=&quot;username&quot;/&gt;
+        &lt;button type=&quot;submit&quot; name=&quot;submit&quot;&gt;Send&lt;/button&gt;
     &lt;/form&gt;
 &lt;/body&gt;
 &lt;/html&gt;
@@ -90,8 +88,6 @@ if($_SERVER[&quot;REQUEST_METHOD&quot;] === &quot;POST&quot;){
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
     &lt;title&gt;Multiple Forms&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -99,12 +95,14 @@ if($_SERVER[&quot;REQUEST_METHOD&quot;] === &quot;POST&quot;){
         &lt;?= $message ?&gt;
     &lt;/p&gt;
     &lt;form method=&quot;POST&quot;&gt;
-        &lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;
-        &lt;button type=&quot;submit&quot; name=&quot;form1&quot;&gt;Envoyer&lt;/button&gt;
+        &lt;label for=&quot;input-username&quot;&gt;Username:&lt;/label&gt;
+        &lt;input id=&quot;input-username&quot; type=&quot;text&quot; name=&quot;username&quot;/&gt;
+        &lt;button type=&quot;submit&quot; name=&quot;form1&quot;&gt;Connect with username&lt;/button&gt;
     &lt;/form&gt;
     &lt;form method=&quot;POST&quot;&gt;
-        &lt;input type=&quot;text&quot; name=&quot;matricule&quot;/&gt;
-        &lt;button type=&quot;submit&quot; name=&quot;form2&quot;&gt;Envoyer&lt;/button&gt;
+        &lt;label for=&quot;input-matricule&quot;&gt;Matricule:&lt;/label&gt;
+        &lt;input id=&quot;input-matricule&quot; type=&quot;text&quot; name=&quot;matricule&quot;/&gt;
+        &lt;button type=&quot;submit&quot; name=&quot;form2&quot;&gt;Connect with agent code&lt;/button&gt;
     &lt;/form&gt;
 &lt;/body&gt;
 &lt;/html&gt;
