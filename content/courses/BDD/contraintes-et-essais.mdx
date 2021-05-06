@@ -1,0 +1,46 @@
+---
+title: Contraintes et jeux d'essais
+order: 5
+---
+import { ExtLink } from '../../../src/components/ExtLink'
+
+### Objectifs
+- Connaissance des contraintes pouvant être mises en places sur une base de données relationnelle
+- Savoir mettre en place des contraintes simples via LDD ou un outil d'administration de SGBDR
+- Connaissance de la notion de jeu d'essai pour une base de données
+- Savoir mettre en place un jeu d'essai et le tester avec un outil d'administration de SGBDR
+
+
+Au delà de la modélisation "statique" définie jusqu'ici concerne principalement le "quoi" (quelles données) et le comment (quelle forme), lorsque l'on va évaluer le modèle dans son fonctionnement "dynamique" (avec intéractions et création/mise à jour/suppression d'occurences) deux points clefs sont importants: La sécurité ainsi que la cohérence des données.  
+Pour pouvoir les mettre en place, les SGBDR nous proposent les notions de *contraintes* et syntaxes associées à imposer à notre base de données, et nous pourrons utiliser un *jeu d'essai* pour ensuite valider l'ensemble du schéma généré.
+
+### Contraintes sur une base de données
+Portez une attention particulière aux **différentes manières qui permettent de définir des contraintes statiques et dynamiques** et prenez un temps pour vous documenter et observer les syntaxes correspondantes.  
+Pour ce faire, basez-vous sur le document AFPA ci-dessous ainsi que toute ressource supplémentaire jugée nécéssaire que vous n'hésiterez pas à partager entre vous.  
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/BDD/AutoForm_-_ContraintesStatiquesEtDynamiquesBDD.pdf" title="Contraintes Statiques et Dynamiques"/>
+
+__Info:__  
+**Certaines règles de gestion ne peuvent pas être implémentées à l'aide de contraintes déclaratives** en LDD SQL; c'est le cas des règles concernant l'évolutivité des valeurs par exemple. Ces contraintes devraient faire l'objet de développements programmés à l'aide de *'triggers'* mais ce n'est pas l'objet de votre mission actuelle.
+
+### Jeux d'essais
+Intéressons-nous maintenant d'avantage à la notion de jeux d'essais.  
+Pour rappel, un jeu d'essai pour une base de données sert à confirmer la validité du modèle, statique comme dynamique.  
+Il est constitué d'un ensemble d'enregistrements (occurences) et transactions "sains" et "dégénérés", qui sont sensés respectivement "passer" et "être bloqués" par le SGBD. Une fois ce jeu d'essai défini sur papier, on peut le saisir en SQL pour le tester en situation réelle et ce sera alors une mesure fiable de la sécurité et du bon comportement de notre base de données.
+
+Afin de mettre en place un tel jeu d'essai, nous aurons donc besoin de pouvoir créer, modifier et supprimer des enregistrements dans notre base de données. Pour l'instant nous utiliserons l'outil d'administration du SGBDR à cette fin. Vous pouvez utiliser les vidéos ci-dessous pour vous autoformer sur ces pratiques. Un fichier sql vous est fourni pour avoir une même base que dans ces exemples.
+<ExtLink src="https://www.youtube.com/watch?v=MZo0-00NcoU&ab_channel=Grafikart.fr" title="Apprendre MySQL (7/20) : Insérer des données, INSERT INTO | Graphikart" />  
+<ExtLink src="https://www.youtube.com/watch?v=ZDncKWp-Q4A&ab_channel=Grafikart.fr" title="Apprendre MySQL (8/20) : Supprimer des données, DELETE FROM | Graphikart" />  
+<ExtLink src="https://www.youtube.com/watch?v=WV_il2jaeDQ&ab_channel=Grafikart.fr" title="Apprendre MySQL (9/20) : Modifier des données, UPDATE | Graphikart" />  
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/BDD/formationsqlDatabase.sql" title="Base.sql"/>
+
+À travers l'utilisation de l'outil d'administration et la mise en place de ces jeux d'essais, vous allez avoir un aperçu du dialecte LMD, Langage de Manipulation des Données. Comme précédemment prenez un temps pour le découvrir et vous documenter sur les mots clefs associés.
+
+
+
+### Table des Lois Vol. 2
+Recommandations pour l'implémentation de bases de données (voir le point 3).
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/BDD/TableDesLoisVol2.pdf" title="Table des Lois Vol.2"/>
+
+### Mise en situation
+Sur la base de ces nouvelles connaissances, prenez un moment maintenant pour vous exercer à mettre en place des contraintes et valider votre modélisation par des jeux d'essais avec les exercices proposés jusqi'ici.  
+Enfin, réalisez ce travail pour notre projet fil rouge *Vidéo Star*.

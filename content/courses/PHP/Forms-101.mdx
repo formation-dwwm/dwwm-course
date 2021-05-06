@@ -1,0 +1,128 @@
+---
+title: PHP Forms 101
+order: 340
+---
+
+### Formulaire de base
+
+```php
+<?php
+
+if($_SERVER["REQUEST_METHOD"] === "POST"){
+    // Le formulaire a probablement été envoyé (on est en POST)
+    if(isset($_POST["username"])){
+        // Les données sont présentes, on peut passer aux traitements
+        $username = $_POST["username"];
+        session_start();
+        $_SESSION["username"] = $username;
+        header("Location: index.php");
+        die();
+    }
+}
+
+// Génération du formulaire (GET et POST si données manquantes)
+?>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Form</title>
+</head>
+<body>
+    <form method="POST">
+        <label for="input-username">Username:</label>
+        <input id="input-username" type="text" name="username"/>
+        <button type="submit" name="submit">Send</button>
+    </form>
+</body>
+</html>
+```
+
+
+### Gestion des Erreurs
+
+```php
+<?php
+
+$errors = [];
+if($_SERVER["REQUEST_METHOD"] === "POST"){
+    // Le formulaire a probablement été envoyé (on est en POST)
+    if(isset($_POST["username"])){
+        // Les données sont présentes, on peut passer aux traitements
+        $username = $_POST["username"];
+        if(!empty($username) && strlen($username) >= 8){
+            // Validation des champs OK
+            session_start();
+            $_SESSION["username"] = $username;
+            header("Location: index.php");
+            die();
+        }else{
+            $errors[] = "Veuillez saisir un nom d'utilisateur ayant au moins 8 caractères";
+        }
+    }else{
+        $errors[] = "Veuillez saisir un nom d'utilisateur";
+    }
+}
+
+// Génération du formulaire (GET et POST si erreurs)
+?>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Form With Error Handling</title>
+</head>
+<body>
+    <?php if(count($errors) > 0){
+        foreach($errors as $error){ ?>
+            <div class="info info-danger"><?= $error ?></div>
+        <?php }
+    } ?>
+    <form method="POST">
+        <label for="input-username">Username:</label>
+        <input id="input-username"  type="text" name="username"/>
+        <button type="submit" name="submit">Send</button>
+    </form>
+</body>
+</html>
+```
+
+### Gestion de plusieurs formulaires
+
+```php
+<?php
+
+$message = "";
+if($_SERVER["REQUEST_METHOD"] === "POST"){
+    // Le formulaire a probablement été envoyé (on est en POST)
+    if(isset($_POST["form1"])){
+        $message = "Bonjour ".$_POST["username"];
+    }else if(isset($_POST["form2"])){
+        $message = "Bonjour Agent ".$_POST["matricule"];
+    }
+}else{
+    $message = "Vous n'avez envoyé aucun formulaire.";
+}
+
+// Génération du formulaire (GET et POST)
+?>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multiple Forms</title>
+</head>
+<body>
+    <p>
+        <?= $message ?>
+    </p>
+    <form method="POST">
+        <label for="input-username">Username:</label>
+        <input id="input-username" type="text" name="username"/>
+        <button type="submit" name="form1">Connect with username</button>
+    </form>
+    <form method="POST">
+        <label for="input-matricule">Matricule:</label>
+        <input id="input-matricule" type="text" name="matricule"/>
+        <button type="submit" name="form2">Connect with agent code</button>
+    </form>
+</body>
+</html>
+```

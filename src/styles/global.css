@@ -13,3 +13,7 @@ details > summary::after {
     font-weight: 800;
     font-size: 20px;
 }
+
+pre{
+    background: rgb(42 42 42)!important;
+}

@@ -1,0 +1,173 @@
+---
+title: MySQL, PDO... et AJAX
+order: 320
+---
+import { ExtLink } from '../../../src/components/ExtLink'
+
+### Objectifs
+- Savoir mettre en oeuvre le middleware PDO avec PHP pour communiquer en CRUD avec un SGBDR
+- Savoir décoder l'objectif précédent
+- Connaître et mettre en oeuvre les bonnes pratiques et sécurités lors de l'utilisation de PDO
+- Savoir exploiter la technologie AJAX pour récupérer ou envoyer dynamiquement des données à un SGBDR en passant par un serveur PHP et l'API que l'on aura développé
+
+**__Durée indicative__**  
+8h
+
+Fier de vos nouvelles connaissances en PHP, vous savez maintenant mettre en place un serveur dynamique, utiliser un SGBDR et communiquer avec celui-ci. Vous avez ainsi appris à développer des pages web qui exploiteront ces données, et connaissez maintenant les bonnes pratiques PHP ainsi que les architectures MVC.  
+Pour compléter ces notions, nous allons maintenant nous pencher d'autant plus sur l'utilisation de PDO pour mettre en oeuvre nos composants d'accès en suivant les bonnes pratiques ainsi que les règles élémentaires de sécurité.  
+Nous pourrons ensuite passer un moment pour voir et développer avec une dernière pièce manquante: la technologie AJAX qui permet à un client web de communiquer avec un serveur.
+
+### PDO et bonnes pratiques
+
+Prenez un temps pour lire le document suivant, qui remet en place quelques généralités sur PDO avant de s'intéresser aux bonnes pratiques et aux notions de sécurité qui entourent son utilisation.  
+
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/PHP/A-Acces-BDD-PDO.pdf" title="Accéder à une Base de données en langage PHP à l'aide de PDO"/>
+
+Vous pourrez ensuite mettre en oeuvre ces notions avec l'exercice guidé ci-dessous.
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/PHP/P-Acces-MySQL-PDO.pdf" title="Exercices PDO"/>
+
+<details>
+    <summary>Correction</summary>
+    <ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/PHP/S-Acces-MySQL-PDO.pdf" title="Correction Exercices PDO"/>
+</details>
+
+### AJAX
+
+AJAX est l'acronyme de **A**synchrounous **J**avascript **A**nd **X**ML. En Français cela pourrait se traduire par *Javascript et XML asynchrones*.  
+C'est une technologie fournie par les navigateurs web et permettant aux scripts clients Javascript de communiquer sur le réseau. De ce fait, elle est très souvent associée avec la notion de *Web 2.0*, car c'est grâce à celle-ci que l'on peut récupérer ou envoyer des données sans effectuer de rechargements de page. C'est cette pièce du web qui a réellement permis la naissance des *SPA*, ou **S**ingle **P**age **A**pp.  
+
+Avant tout, deux choses à savoir:  
+Le fait qu'AJAX porte toujours ce nom, et par extension le nom XML, est trompeur. Historiquement AJAX a été développé dans l'idée d'utiliser le format XML pour échanger avec un serveur web. Si c'est bien sûr tout à fait possible, il est beaucoup plus commun maintenant que d'utiliser cette technologie en combinaison avec le format JSON pour l'échange de données. On devrait donc quelque part l'appeler "AJAJ", même si le nom historique persiste.  
+De plus, le terme AJAX présente de multiples synonymes ou termes associés. On parle souvent de `XHR` ou/pour `XMLHttpRequest`, qui est l'unique objet initialement fourni par les navigateurs pour effectuer ces requêtes réseau. Etant peu pratique à l'utilisation (a minima disons "verbeux"), une implémentation proposée par `jQuery` et accessible par `$.ajax` sera aussi souvent trouvée voir confondue. Par extension et adaptation des navigateurs web, la plupart des navigateurs récents (tous) proposent maintenant la fonction `fetch` pour effectuer ces requêtes asynchrones, dans un paradigme de `Promises`, **et qui sera maintenant à préférer dans la plupart des cas**. Enfin, diverses librairies proposent des outils plus ou moins avancées pour effectuer ces mêmes requêtes réseau (et utilisent `fetch` ou `XHR` en interne). On peut citer `axios` parmis les plus utilisées, ou encore le `HttpClient` proposé par le framework `Angular`.  
+
+Avant d'en voir plus par vous même, voici trois exemples minimaux :
+
+#### Hello AJAX
+```html
+<!-- index.html -->
+<!doctype html>
+<html>
+    <body>
+        <script>
+            fetch('api.php')
+                .then(response => response.text())
+                .then(message => {
+                    alert(`Hello ${message}`);
+                })
+        </script>
+    </body>
+</html>
+```
+```php
+<?php
+// api.php
+echo "AJAX";
+```
+
+#### AJAX With JSON
+```html
+<!-- index.html -->
+<!doctype html>
+<html>
+    <body>
+        <ul id="users-list"></ul>
+        <script>
+            fetch('api.php')
+                .then(response => response.json())
+                .then(users => {
+                    const $list = document.getElementById('users-list');
+                    $list.innerHTML =  users.map(user => `
+                        <li>${user.name}</li>
+                    `).join('');
+                })
+        </script>
+    </body>
+</html>
+```
+```php
+<?php
+// api.php
+$users = [
+    [ "name" => "Riri" ],
+    [ "name" => "Fifi" ],
+    [ "name" => "Loulou" ]
+];
+header('Content-Type: application/json');
+echo json_encode($users);
+```
+
+#### AJAX And POST
+```html
+<!-- index.html -->
+<!doctype html>
+<html>
+    <body>
+        <script>
+            const options = {
+                method: "POST",
+                headers: new Headers({
+                    "Content-Type": "application/json"
+                }),
+                body: JSON.stringify({ username: "root", password: "" })
+            }
+            fetch('api.php', options)
+                .then(response => response.json())
+                .then(apiResponse => {
+                    if(apiResponse.success){
+                        alert(`Hello ${apiResponse.data.displayName}`);
+                    }else{
+                        alert(`Error: ${apiResponse.error}`);
+                    }
+                })
+                .catch(error => alert("General Error"))
+        </script>
+    </body>
+</html>
+```
+```php
+<?php
+// api.php
+$json_params = file_get_contents("php://input");
+$decoded_params = json_decode($json_params, true);
+
+if (strlen($json_params) > 0 && json_last_error() == JSON_ERROR_NONE){
+    $_POST = $decoded_params;
+}
+  
+if(!isset($_POST["username"]) || !isset($_POST["password"])){
+    sendJsonError(400, "Bad Request");
+}
+
+if($_POST["username"] === "root" && $_POST["password"] === ""){ // O, RLY ?!
+    $profile = [ "username" => "root", "displayName" => "admin", "roles" => ["ROLE_ADMIN", "ROLE_USER"]];
+    sendJson($profile);
+}else{
+    sendJsonError(401, "Bad credentials");
+}
+
+function sendJson($data){
+    header('Content-Type: application/json');
+    echo json_encode([
+        "success" => true,
+        "data" => $data
+    ]);
+    die();
+}
+function sendJsonError($code, $message){
+    http_response_code($code);
+    header('Content-Type: application/json');   
+    echo json_encode([
+        "success" => false,
+        "error" => $message
+    ]);
+    die();
+}
+```
+
+### Mise en oeuvre AJAX
+
+Nous vous proposons ici de mettre en oeuvre cette technologie. Plus précisément, il serait intéressant de mettre en place une page web utilisant AJAX pour interroger un serveur PHP, qui lui même communiquera avec un SGBD avant de répondre (en JSON). Soit, le cas typique d'utilisation d'AJAX.  
+Pour ce faire, nous vous proposons de développer un petit ensemble client-serveur utilisant AJAX pour permettre une recherche textuelle dynamique et réactive, comme on en trouve sur de multiples sites de nos jours.  
+Vous pouvez imaginer votre propre implémentation et chercher à la mettre en place, ou vous pouvez vous appuyer sur la vidéo proposée ci-dessous pour un tutoriel guidé. Bonne découverte !  
+
+<ExtLink src="https://www.youtube.com/watch?v=-v53ly8Zlfc&ab_channel=GTCoding" title="How To Create Live Search Using PHP and Fetch API from MySQL Database | GTCoding"/>

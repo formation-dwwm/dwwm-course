@@ -1,0 +1,43 @@
+---
+title: Architecture MVC
+order: 310
+---
+import { ExtLink } from '../../../src/components/ExtLink'
+
+### Objectifs
+- Connaitre la notion de développement d'applications par couches
+- Savoir reconnaître et mettre en place une architecture MVC en étant guidé
+- Savoir distinguer code procédural, code orienté objet, code architecturé et code spaghetti
+
+**__Durée indicative__**  
+21h
+
+### Introduction
+
+Sans y prêter attention, lors d'un développement d'une application web en php il est très facile et même commun que du créer du code dit "spaghetti", notamment dans ce cas mélangeant allègrement `php` et `html` à plusieurs reprises dans un même fichier. Et par extension, un document html supportant lui-même plusieurs langages internes, il n'est pas rare de trouver des fichiers php entremêlant du code `php`, `html`, `css` et `js`.  
+On comprend très vite que développer une application entière de la sorte n'est pas tenable, et que non seulement le développement lui-même sera impacté mais la maintenabilité de l'application en sera aussi grandement affectée.  
+Pour palier à celà, il convient de réfléchir à nos applications de manière plus structurée. On peut à cet effet utiliser ce que l'on appelle des *Design Patterns* ou *Patrons de conceptions*. Ce sont des architectures génériques de code nous permettant d'avoir des guides pour la structure de nos applications. Nous allons ici découvrir un premier design pattern, l'architecture MVC.  
+Cette architecture découpe une application en cinq couches principales: couche de présentation, couche de contrôle, couche métier, couche d'accès aux données et couche de persistance. Ces couches sont regroupées selon trois responsabilités premières: le **M**odèle qui sera en charge des couches d'accès aux données ainsi que des couches métiers et persistance, les **V**ues qui correspondront aux couches de présentation et enfin les **C**ontrôleurs qui effectueront les... contrôles.  
+C'est l'une des architectures les plus utilisées sur le web comme en logiciel, et on se propose ici de mettre en place une structure qui va s'en inspirer très fortement.
+
+### Instructions
+
+Suivez la courte vidéo AFPA ci-dessous pour compléter le paragraphe précédent et avoir une vision d'ensemble de nos objectifs.  
+<ExtLink src="https://videos.afpa.fr/widget/videos-architecturephpencouches-mp4" title="Architecture en couches"/>
+
+
+Nous vous proposons ensuite de reprendre une application php existante, développée en "spagetthi", et de la transformer en une architecture inspirée de MVC. C'est ce que l'on appelle du **Refactoring**, soit réécrire le code d'une application pour améliorer son expressivité, sans toutefois modifier le comportement de l'application d'un point de vue extérieur.  
+C'est un travail qu'un développeur est souvent amené à faire au cours de sa carrière. *D'aucuns racontent qu'il serait même bon d'en faire une habitude avant chaque commit...*  
+Utilisez l'archive ci-dessous pour avoir le code initial, puis suivez les instructions du TP dans le document pdf pour effectuer ce refactoring progressivement.  
+
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/PHP/CasVideoClassique2.zip" title="Fichiers source d'origine"/>
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/PHP/P-Developpement-PHP-en-couches.pdf" title="Instructions du TP"/>
+
+N'hésitez pas à travailler ou réfléchir à plusieurs.  
+C'est votre première mission de refactoring donc... Bonne chance ! Et bonne découverte.
+
+### Par extension...
+
+Enfin, fort de ces apprentissages, vous pourrez commencer à réfléchir à l'architecture que vous pourriez employer pour développer le site *VidéoStar* dont vous avez déjà pu effectuer la conception.  
+Si le temps vous le permet, vous pouvez commencer à implémenter quelques pages de cette application.  
+**Si dans l'équipe vous connaissez déjà un framework MVC**, n'hésitez pas à l'utiliser plutôt que d'adopter la structure proposée. Toutefois la prise en main d'un tel framework nécessite un apprentissage non négligeable et notre temps pour cette séance est limité. La structuration proposée ici est simple à mettre en œuvre et nécessite assez peu de code tout en restant très proche des démarches adoptées par les auteurs des frameworks MVC.

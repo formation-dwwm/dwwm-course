@@ -1,0 +1,166 @@
+---
+title: VidéoStar | Mise en Situation
+order: 330
+---
+import { ExtLink } from '../../../src/components/ExtLink'
+import { Card } from '../../../src/components/Card'
+
+Forts de vos nouveaux apprentissages, il est temps maintenant de les mettre en oeuvre lors d'une mise en situation.  
+On se propose ici de reprendre notre projet "fil-rouge" VidéoStar et d'implémenter quelques premières User-Stories en utilisant une architecture MVC ainsi que l'ensemble des bonnes pratiques que vous avez pu étudier jusqu'ici.
+
+### Objectifs
+- Être en mesure d'implémenter un site fullstack à partir de spécification
+- Savoir mettre en place un mécanisme d'authentification et d'autorisation sécurisé
+
+**__Durée indicative__**  
+21h
+
+### Instructions
+
+Seul ou en groupe, et en utilisant une architecture MVC avec PHP, réalisez une plateforme web répondant aux User-Stories précisées ci-dessous.  
+Si vous avez plus de temps, profitez-en pour améliorer votre code. Vous pouvez aussi chercher à implémenter plus de fonctionnalités en vous inspirant du Backlog proposé.  
+Vous pouvez tout à fait utiliser vos développements précécents pour "bootstraper" celui-ci.
+
+### User-Stories
+
+<Card>
+
+#### Inscription  
+En tant que citoyen de la planète Geflükc, je souhaiterais pouvoir faire une demande d'adhésion à la bibliothèque VidéoStar depuis le portail en ligne afin de respecter le confinement actuellement mis en place sur ma planète.  
+
+__Critères__:
+- La page est accessible publiquement mais redirigée si l'utilisateur est connecté
+- La demande d'adhésion prépare un futur utilisateur adhérent lié aux informations de Nom, Nom d'utilisateur et Mot de Passe choisis par l'utilisateur dans le formulaire
+- La demande d'adhésion est bien créée en base de données
+- Le mot de passe est stocké de façon sécurisée
+
+</Card>
+
+<Card>
+
+#### Connexion adhérent  
+En tant qu'adhérent VidéoStar, j'aimerais pouvoir me connecter au site web afin d'être identifié en ligne par la plateforme et accéder à ses fonctionnalités.  
+
+__Critères__:
+- Connexion avec nom d'utilisateur et mot de passe uniquement si adhésion acceptée
+- Connexion rejetée si l'adhérent n'existe pas, n'est pas accepté, ou si son mot de passe n'est pas le bon
+- La page redirige vers les infos de compte suite à la connexion
+
+</Card> 
+
+<Card>
+
+#### Connexion administrateur  
+En tant qu'administrateur VidéoStar, j'aimerais pouvoir me connecter au site web et être identifié en tant qu'administrateur du site afin d'accéder à ses fonctionnalités de gestion.  
+
+__Critères__:
+- Connexion avec nom d'utilisateur et mot de passe uniquement si adhésion acceptée
+- Connexion rejetée si l'administrateur n'existe pas ou si son mot de passe n'est pas le bon
+- La page redirige sur le tableau de bord suite à la connexion
+
+</Card> 
+
+<Card>
+
+#### Page de connexion unique
+En tant qu'administrateur VidéoStar, j'aimerais utiliser la même page de connexion que les adhérents afin de simplifier l'utilisation de mon site.  
+
+__Critères__:
+- Page unique de connexion pour administrateur et adhérent
+- La connexion détecte cependant bien si l'utilisateur est administrateur (notion d'autorisation)
+- Les pages protégées du site redirigent sur cette connexion
+
+</Card> 
+<Card>
+
+#### Validation d'adhérents  
+En tant qu'administrateur VidéoStar, j'aimerais avoir une page protégée me permettant de consulter les nouvelles demandes d'adhésion afin de pouvoir les valider ou les refuser.  
+
+__Critères__:
+- Deux action accessibles par demande d'adhésion: Accepter et Refuser
+- L'état des adhésion est bien mis à jour suite à une action de l'administrateur
+- Le changement d'état d'adhésion est bien protégé contre les failles de sécurité, notamment CSRF
+
+</Card> 
+<Card>
+
+#### Compte adhérent
+En tant qu'adhérent VidéoStar, j'aimerais avoir une page protégée me donnant accès à mes informations de compte ainsi que mes emprunts en cours afin de savoir plus facilement où j'en suis dans mes locations.  
+
+__Critères__:
+- La page n'est accessible qu'à l'adhérent concerné
+- La page indique mon nom, nom d'utilisateur ainsi que numéro d'adhérent
+- La page indique la liste des éléments que j'ai actuellement empruntés
+- [Optionel] La page me permet d'indiquer qu'un emprunt a été perdu
+
+</Card> 
+<Card>
+
+#### Tableau de bord administrateur  
+En tant qu'administrateur VidéoStar, j'aimerais avoir un espace protégé me permettant de consulter en un coup d'oeil et pour chaque type de support (Blu-Ray, DVD, ...) le nombre d'exemplaires empruntés ainsi que le nombre d'exemplaires total.  
+
+__Critères__:
+- La page n'est accessible qu'à un administrateur connecté du site
+- Pour chaque type de support, le nombre d'exemplaires actuellement empruntés est visible, ainsi que le nombre d'exemplaires total.
+- [Optionel] Le nombre total d'emprunts et d'exemplaires tous supports confondus est visible
+- [Optionel] En cliquant sur un type de support l'administrateur accède à la liste des emprunts en cours pour ce support.
+
+</Card> 
+<Card>
+
+#### Bibliothèque publique
+En tant que développeur d'applications tierces, j'aimerais avoir un endpoint d'API publique pour accéder au catalogue proposé par VidéoStar afin de pouvoir le promouvoir d'autres façon avec des applications que j'aurais développées.  
+
+__Critères__:
+- Une URL publique d'accès permet de récupérer la liste des oeuvres proposées par VidéoStar
+- Les données sont envoyées au format JSON
+- [Optionel] Il est possible de filtrer par type de support (ou autre taxonomie)
+
+</Card> 
+<Card>
+
+#### [Optionel] Historique adhérent
+En tant qu'adhérent VidéoStar, j'aimerais avoir une page protégée pour accéder à l'historique de mes emprunts afin d'avoir un tracé et savoir si j'ai déjà visionné une oeuvre.  
+
+__Critères__:  
+- La page n'est accessible qu'à l'utilisateur concerné
+- La page liste l'ensemble des emprunts passés tous supports confondus
+- Au minimum, le nom de l'oeuvre, le support, la date ainsi que la durée de l'emprunt sont visibles
+
+</Card> 
+
+### Rappel des besoins du client (Backlog)
+
+<details>
+    <summary>
+        <em>Backlog</em>
+    </summary>  
+<br/>  
+
+Le gérant d'Etat VidéoStar souhaite avec cette informatisation :  
+- Enregistrer les nouveaux exemplaires acquis par VidéoStar ;
+- Enregistrer l'inscription des nouveaux adhérents et éditer leur carte ;
+- Lors du passage d'un adhérent, enregistrer ses nouveaux emprunts, ses rendus
+d'exemplaires et calculer les montants dus ;
+- Visionner facilement sur écran la situation d'un adhérent avec tous les exemplaires en sa
+possession ;
+- Faciliter la recherche des adhérents sur des critères comme les stars qui participent à une
+fiction et selon quel rôle, ou les lieux concernés par un documentaire ;  
+
+Le gérant d'Etat VidéoStar souhaite de plus éditer des états de gestion :
+- Mensuellement par type de document le nombre d'exemplaires loués et téléchargés ;
+- En fin de journée la liste des titres pour lesquels tous les exemplaires ont été loués ;
+- En fin de journée le chiffre d'affaires réalisé par type de support (Blu-Ray, DVD, VOD) et par
+type de document ;
+- Périodiquement la liste des titres et le nombre d'exemplaires de chaque titre par type de
+support ;
+- Chaque semaine la liste des exemplaires loués depuis plus de 7 jours et éditer
+systématiquement les lettres de relance correspondantes (une seule lettre par adhérent
+pour l'ensemble de ses emprunts) ; ce sera ensuite au gérant de décider d'envoyer ou non
+les lettres de relance selon la connaissance qu'il a de ses adhérents ; 
+
+</details>
+
+### Documents de référence
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/Merise/VideoStarConcevoirBDD.pdf" title="VidéoStar | Conception"/>
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/BDD/VideoStarMettreEnPlaceBDD.pdf" title="VidéoStar | Implémentation"/>

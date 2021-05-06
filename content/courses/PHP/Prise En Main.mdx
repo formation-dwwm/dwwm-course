@@ -1,0 +1,79 @@
+---
+title: Prise en main PHP
+order: 300
+---
+import { ExtLink } from '../../../src/components/ExtLink'
+
+Dans votre arsenal de développeur Web, il ne nous reste plus qu'à découvrir comment mettre en place du script qui s'éxecutera sur nos Back-Ends.  
+À la différence des navigateurs où nous sommes contraints pour les langages utilisables, le code back-end s'apparente au développement logiciel en ce qu'il va pouvoir être mis en oeuvre avec de multiples langages.  
+Dans cette formation nous utiliserons le PHP à cet effet, l'un des plus présents actuellement sur les serveurs Web.  
+Il est donc maintenant temps de **prendre en main le langage PHP**;
+
+
+
+**__Objectifs__**  
+- Se repérer dans l'environnement PHP: syntaxe, contexte, documentation, place dans le développement web
+- Connaitre les bases du langage PHP: Syntaxes, Sessions, Formulaires, rapport avec HTML
+- Connaitre les bases de la POO en PHP: classes, membres, accesseurs
+- Savoir réutiliser et spécialiser ses classes
+
+
+**__Durée indicative__**  
+14h
+
+### Environnement PHP
+
+PHP est un langage serveur. C'est un langage de script et a donc besoin d'un moteur pour être exécuté. Le langage PHP vient avec un utilitaire, `php`, notamment capable d'exécuter les fichiers utilisant ce langage. Il est parfois utilisé pour créer des outils en ligne de commande, et le plus souvent utilisé pour réaliser des sites internet. Du point de vue PHP, ces derniers peuvent être mis en oeuvre directement via la génération de pages dynamiques (création de code html), ou la mise à disposition d'APIs (communication le plus souvent en JSON).  
+Sur un serveur web, ce n'est pas PHP qui fera office de serveur http (et qui écoutera donc les requêtes). PHP a besoin d'être accompagné pour cette tâche, et le plus souvent ce sera `Apache` ou `Nginx` qui aura ce rôle. Et étant très souvent utilisé avec un SGBD relationnel, notamment MySQL, on parle du stack **LAMP** pour **L**inux, **A**pache, **M**ySQL et **P**HP qui représente une part importante des serveurs web.  
+Pour vos développements locaux, il vous faudra donc un équivalent. Pour simplifier l'installation et configuration de ces différents logiciels, nous vous conseillons d'utiliser **Wamp** ou **Xamp** que vous devriez déjà connaître.  
+
+Prenez maintenant un moment pour effectuer diverses veilles sur PHP, énormément de ressources sont disponibles sur le web. 
+Pour accélérer cette découverte, commencez par lire les *Conseils d'expert* proposés ci-desssous. Profitez-en pour effectuer quelques recherches sur la *documentation officielle de PHP* qui doit devenir votre référence.
+
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/PHP/PHPConseilExpert.pdf" title="PHP, conseils d'expert"/>
+<ExtLink src="http://php.net/manual/fr/" title="Documentation officielle de PHP"/>
+
+
+### Les Bases
+
+Vous le savez maintenant, rien de mieux que de "mettre les mains dedans" pour pouvoir découvrir un langage. En vous appuyant sur toutes les ressources qui pourraient vous paraître nécéssaires, entrainez-vous à PHP en réalisant les exercices guidés ci-dessous :
+
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/PHP/P-Developpement-PHP-Bases.pdf" title="Développement PHP: Les bases"/>
+
+**__Exemple de ressources__**
+<ExtLink src="https://www.pierre-giraud.com/php-mysql/cours-complet/cours-php-mysql-presentation.php" title="Cours PHP MySQL Pierre Giraud"/>
+<ExtLink src="https://www.youtube.com/watch?v=6AMZC3uIE4s&list=PLwLsbqvBlImHrYX8EKgp1st9vV04Cvymz&ab_channel=PierreGiraud" title="Version Vidéo"/>
+<ExtLink src="https://openclassrooms.com/fr/courses/918836-concevez-votre-site-web-avec-php-et-mysql" title="Concevez votre site web avec PHP et MySQL | OpenClassRooms"/>
+
+
+### POO: Découverte
+
+Il est temps maintenant de se pencher à nouveau sur la programmation orienté objet et d'apprendre à la mettre en oeuvre en PHP. Vous pouvez commencer par regarder la vidéo ci-dessous, qui, certes un peu vieillotte, permet toutefois de faire un balayage efficace du sujet.  
+
+<ExtLink src="https://www.youtube.com/watch?v=NM1izhtKwgI&ab_channel=AfpaDL-CDI" title="Présentation du langage PHP Orienté Objet"/>
+
+__Note:__  
+Cette vidéo indique que PHP ne gère pas les types. Ca n'est que partiellement vrai, et les évolutions récentes de PHP rajoutent nombre de fonctionnalités à cet égard. Nous vous recommandons d'utiliser la version >**7.4** de PHP, qui permet notamment de définir des `type hints`, ou "indices de types" à nos développements.   
+
+<ExtLink src="https://www.php.net/manual/fr/language.types.declarations.php" title="Déclaration de types en PHP"/>
+
+Prenez un temps aussi pour aborder le document `Principes d'encapsulation` pour mieux cerner cette notion.  
+
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/PHP/01A-principes-encapsulation-PHP.pdf" title="Principes d'encapsulation"/>
+
+Enfin, appuyez vous sur ces ressources et sur le web pour réaliser les exercices proposés.
+
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/PHP/P-langage-PHP-objet.pdf" title="Programmation orientée objet en PHP"/>
+
+### POO: Héritage
+
+Afin d'améliorer la réusabilité de notre code ainsi que le rendre plus compréhensible, une notion de programmation orientée objet est très utile: l'héritage.  
+Utilisez la vidéo ci-dessous pour découvrir le sujet. Vous pourrez ensuite utiliser le document `Réutiliser et spécialiser les classes` pour aller plus loin.
+
+
+<ExtLink src="https://videos.afpa.fr/widget/videos-presentationheritage-mp4" title="Héritage et Polymorphisme"/>
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/PHP/02A-Reutiliser-et-specialiser-les-classes-PHP.pdf" title="Réutiliser et spécialiser les classes"/>
+
+Prenez enfin un temps pour réaliser les exercices suivants :
+
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/PHP/02E-Reutiliser-et-specialiser-PHP.pdf" title="Exercices héritage de classes"/>

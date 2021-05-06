@@ -1,0 +1,66 @@
+---
+title: Sécurité des bases de données
+order: 6
+---
+import { ExtLink } from '../../../src/components/ExtLink'
+
+### Objectifs
+- Savoir identifier et mettre en place des utilisateurs spécifiques de SGBD à des fins de sécurisation des données
+- Savoir exécuter un export d'une base de données depuis un outil d'administration de SGBDR
+- Connaitre la notion de sauvegardes régulières d'une base de données
+- Savoir configurer un SGBD dans une optique de sécurité et de performances du système
+
+Dans les séances précédentes nous avons successivement appris à:
+- Concevoir une base de données avec Merise
+- Implémenter cette même base de données avec le modèle créé
+- Tester le bon comportement et la robustesse de la cohérence de nos données
+
+Il ne nous reste donc plus qu'un point avant d'aborder les notions de communication avec cette BDD, et il s'agit maintenant de parler un peu de sécurité.
+
+### Utilisateurs et droits minimaux
+D'un point de vue SI, une part très importante de données sensibles d'une entreprise se situe le plus souvent dans les bases de données. Il est donc extrêmement important de bien sécuriser son contenu.  
+Le premier rempart que nous propose un SGBDR est la connexion à celui-ci. En effet, la connexion à la plupart des SGBDR est régie par le concept d'utilisateurs et de droits d'accès associés.  
+Par exemple, pour WAMP (et sur beaucoup d'hébergements mutualisés) un utilisateur de la BDD est créé par défaut, avec `root` pour username, `{champ-vide}` pour mot de passe, et le plus souvent des droits d'administration sur l'ensemble du SGBD.
+Il est tout à fait possible et même **vivement recommandé** que de créer des utilisateurs supplémentaires avec des droits spécifiques qui leur seront attribués.  
+
+Par exemple, pour un site de blogging avec des tables `users`, `options`, `posts`, `taxonomy` et `comments`, et en admettant qu'on sépare l'administrateur de l'éditeur de contenu, ou que plusieurs personnes peuvent collaborer pour ce contenu sans avoir les droits d'administration du site, on pourrait typiquement avoir **quatre** utilisateurs de notre base de données, avec des droits différents :
+- USER -> lecture/écriture sur la table `comments` et sur sa propre occurence de la table `user`, lecture seule sur `posts` et `taxonomy`
+- CONTRIBUTOR -> lecture/écriture sur les tables `posts` et `comments`, lecture seule sur `options`
+- ADMINISTRATOR -> lecture/écriture sur `options` et `users` (au complet)
+- ROOT_ADMIN -> lecture/écriture sur l'ensemble des bases de données du SGBD
+
+Chaque droit d'accès plus élevé donnant aussi droit à l'ensemble des autorisations disponibles aux niveaux inférieurs.  
+Ce faisant, le serveur utilisera des connexions dédiées en fonction de la personne actuellement connectée, et les données sensibles n'en sont que **mieux sécurisées**.  
+
+Pour mieux appréhender ce concept, vous pouvez lire la *Partie 4* du document AFPA suivant :
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/BDD/afpa-Sécuriser-BaseDonnées.pdf" title="Sécuriser l'accès et l'utilisation d'une base de données"/>
+
+Une fois la notion mieux appréhendée, prenez un temps pour avoir une réflexion sur les utilisateurs qui pourraient être utiles dans vos modélisations actuelles.  
+Au moins pour le projet *VidéoStar*, mettez en place cette nouvelle sécurité.
+
+
+### Sauvegardes
+Afin d'assurer la pérénité de nos données, il est important de pouvoir réagir et rétablir la stabilité d'un système suite à une attaque et/ou une perte de données, ou même plus généralement en cas de problèmes.  
+Pour ce faire, l'administrateur d'un SGBD mettra le plus souvent en place une automatisation des exports de la base de données qui s'effectuera à intervalles réguliers.  
+Pour cela de multiples façons de faire sont possibles. Toutefois très souvent, c'est via l'utilisation du programme `cron` et d'un script d'export spécifique que ces automatisations seront mises en place.  
+Prenez un temps pour effectuer quelques recherches sur le sujet et voir l'état de l'art en la matière.  
+
+__Info__: Cette même notion de backup est aussi très souvent utilisée pour l'ensemble du Back-End web. En plus des sauvegardes de BDD, on utilise aussi la plupart du temps la notion de snapshot ou capture des fichiers d'un serveur web de façon à pouvoir le restaurer dans un état précédent en cas de pépin. C'est notamment une des raisons pour laquelle la virtualisation est de plus en plus utilisée pour les serveurs web, car elle facilite entre autres énormément le processus de création de `snapshot` d'une Machine Virtuelle.
+
+
+### Sécurité de configuration
+Aussi bien pour la sécurité que pour les performances du système, il est important de savoir bien configurer son SGBD. Vous travaillerez d'autant plus ces notions lors de vos expériences futures, mais prenez un temps pour lire le document AFPA suivant afin d'avoir un premier regard et connaissance de l'existant sur le sujet :
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/BDD/afpa-ParametrerSGBD.pdf" title="Paramétrer le SGBD en suivant les bonnes pratiques de sécurité"/>
+
+### Sécurité d'usage
+
+Bien d'autres questions se posent dans la sécurisation d'une base de données, et notamment durant son utilisation. Nous en traiterons une partie dans les séances prochaines, lorsque nous utiliserons des scripts d'accès à nos bases de données.
+
+Pour l'instant et pour en savoir plus sur le sujet, veuillez vous référer aux parties non traitées du document AFPA suivant :
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/BDD/afpa-Sécuriser-BaseDonnées.pdf" title="Sécuriser l'accès et l'utilisation d'une base de données"/>
+
+__Info__: Les exemples concernant les scripts sont ici en Java. L'implémentation est un peu différente de ce que nous pourrons faire en PHP, mais les notions sont strictement identiques.
+
+### Table des Lois Vol. 2
+Recommandations pour l'implémentation de bases de données (voir les points 4 et 5).
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/BDD/TableDesLoisVol2.pdf" title="Table des Lois Vol.2"/>

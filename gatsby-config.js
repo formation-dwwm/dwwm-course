@@ -10,12 +10,29 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `courses`,
+        path: `${__dirname}/content/courses`,
+      },
+    },
+    'gatsby-transformer-sharp',
+    `gatsby-remark-images`,
+    {
       resolve: `gatsby-plugin-mdx`,
       options: {
         defaultLayouts: { default: path.resolve('./src/components/layout.js') },
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1035,
+              sizeByPixelDensity: true,
+            },
+          },
+        ],
       },
     },
-    'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -24,13 +41,23 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: `gatsby-plugin-webfonts`,
       options: {
-        name: `courses`,
-        path: `${__dirname}/content/courses`,
+        fonts: {
+          google: [
+            {
+              family: "Roboto",
+              variants: ["300", "400", "500"],
+              //subsets: ['latin']
+              //text: 'Hello'
+              //fontDisplay: 'swap',
+              //strategy: 'selfHosted' // 'base64' || 'cdn'
+            },
+          ],
+        },
       },
     },
-    'gatsby-transformer-sharp',
+    'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
     {
       resolve: `gatsby-plugin-manifest`,

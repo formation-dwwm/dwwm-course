@@ -1,0 +1,45 @@
+---
+title: LDD | Langage de Définition des Données
+order: 4 
+---
+import { ExtLink } from '../../../src/components/ExtLink'
+
+### Objectifs
+- Connaissance d'outils d'administration de SGBDR
+- Pouvoir créer une base de données dans un outil d'administration de SGBDR
+- Être en mesure d'importer ou éxécuter un script SQL dans un outil d'administration de SGBDR
+- Savoir reconnaitre le dialecte LDD d'une base MySQL et retrouver les mots clefs associés
+- Savoir relire, vérifier et rectifier un LDD créé par un outil de gestion dédié à Merise
+- Savoir exécuter un export d'une base de données depuis un outil d'administration de SGBDR
+
+### Administration du SGBDR
+Il existe de multiples outils d'administration de bases de données, y compris pour les bases relationnelles. Sur un stack LAMP toutefois, c'est le programme `phpMyAdmin` que l'on retrouvera le plus souvent.  
+Il est temps d'en découvrir plus sur cet outil. En lien avec les objectifs ci-dessus, vous pouvez utiliser les deux vidéos et le document proposé sur l'utilisation de phpMyAdmin, ainsi que chercher des ressources supplémentaires si nécéssaire.  
+N'hésitez pas non plus à faire une courte veille technologique pour découvrir d'autres outils d'administration de SGBD(R).  
+<ExtLink src="https://www.youtube.com/watch?v=0DL-MeAvWz4&ab_channel=PrimFX" title="TUTO PHP - #8 Introduction à phpMyAdmin | PrimFX" />  
+<ExtLink src="https://www.youtube.com/watch?v=fOpf1U6M0kY&ab_channel=Grafikart.fr" title="Apprendre MySQL (4/20) : PHPMyAdmin | Graphikart" />  
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/BDD/Z-Manuel-Pratique-phpMyAdmin.pdf" title="Manuel Pratique"/>
+
+
+### Langage de définition des données
+Le LDD, ou Langage de Définition des Données, est un subset du SQL dédié à la définition du modèle relationnel, à savoir principalement les tables, colonnes, index et contraintes que l'on souhaite implémenter.  
+C'est notamment le langage utilisé pour un MPDR, soit la dernière étape de la méthode Merise.
+
+Commencez par reprendre quelques MPDR générés dans les sections précédentes et prenez un temps pour découvrir plus en profondeur leur syntaxe.  
+Pour chaque mot clef de ce langage, pensez à faire une recherche pour connaitre son rôle et son utilisation. Pour rappel, le SGBDR que nous utilisons est MySQL.  
+Vous pouvez éventuellement compléter notre dictionnaire des termes de la formation avec ceux découverts dans cette séance.
+
+Apprenez ensuite à relire, vérifier et éventuellement rectifier ces scripts LDD (ou MPDR).  
+Sachez qu'il est de moins en moins nécéssaire pour un développeur en poste que de connaitre ce langage par coeur et de savoir écrire un LDD. Toutefois, il est indispensable que celui-ci sache lire un script LDD et avoir un regard critique dessus, ainsi qu'effectuer les modifications nécéssaires éventuellement sur la base de la documentation associée.
+
+### La croisée des chemins
+Enfin, prenez un temps pour croiser ces nouvelles compétences, et faites en sorte de créer une base de données depuis un outil d'administration puis de définir le modèle de la base créée en utilisant les MPDs générés et vérifiés. Pour cela, vous devrier pouvoir importer ou exécuter les scripts SQL dans l'outil d'administration.  
+N'hésitez pas à essayer aussi de créer quelques enregistrements, et par là même valider la pertinence de votre modèle.  
+
+Enfin, vous pouvez réfléchir à établir quelques exemples d'enregistrements "sains", sensés donc fonctionner, ainsi que d'enregistrements "dégénérés", soit des enregistrements qui seraient sensés ne pas pouvoir être créés selon votre modèle actuel.  
+Le fait de lister ces informations, ainsi que de tester le comportement réel de la base de données vis à vis de ces enregistrements constitue ce que l'on appelle les "tests de comportement" d'une base de données, et suivent le plus souvent directement l'étape de conception dans un projet.
+
+
+### Table des Lois Vol. 2
+Recommandations pour l'implémentation de bases de données (voir les points 1 et 2).
+<ExtLink src="http://ee0421d80ebc4e9792ad131272c3bf89.testmyurl.ws/resources/BDD/TableDesLoisVol2.pdf" title="Table des Lois Vol.2"/>
